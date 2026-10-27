@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output (npm run build)
+*.vsix
+
+# Logs
+npm-debug.log*
+
+# Env / secrets
+.env
+
+# OS / editor
+.DS_Store
+.vscode-test/

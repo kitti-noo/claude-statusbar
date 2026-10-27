@@ -1,0 +1,48 @@
+{
+  "name": "claude-statusbar",
+  "displayName": "Claude Status Bar",
+  "description": "Show Claude plan usage limits (session / weekly), model and context in the VS Code status bar.",
+  "version": "0.0.14",
+  "publisher": "local",
+  "license": "UNLICENSED",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "scripts": {
+    "build": "npm version patch --no-git-tag-version && npx --yes @vscode/vsce package --allow-missing-repository",
+    "install-vsix": "code --install-extension claude-statusbar-$npm_package_version.vsix",
+    "release": "npm run build && npm run install-vsix"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "claudeStatusbar.refresh",
+        "title": "Claude Status Bar: Refresh"
+      }
+    ],
+    "configuration": {
+      "title": "Claude Status Bar",
+      "properties": {
+        "claudeStatusbar.refreshSeconds": {
+          "type": "number",
+          "default": 5,
+          "description": "How often to re-read Claude Code transcripts."
+        },
+        "claudeStatusbar.barWidth": {
+          "type": "number",
+          "default": 10,
+          "description": "Number of blocks in the context usage bar."
+        },
+        "claudeStatusbar.usageRefreshSeconds": {
+          "type": "number",
+          "default": 120,
+          "description": "How often to fetch plan usage limits (min 30s)."
+        }
+      }
+    }
+  }
+}
